@@ -1,0 +1,12 @@
+{
+  "name" : "gutierrezanthony/328/application",
+  "authors" : [
+    {
+      "name" : "Anthony Gutierrez",
+      "email" : "gutierrezanthony715@gmail.com"
+    }
+  ],
+  "require" : {
+      "bcosca/fatfree-core": "dev-master"
+  }
+}
