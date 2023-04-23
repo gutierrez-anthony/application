@@ -1,0 +1,18 @@
+p {
+    border-top: lightgray 3px solid;
+}
+#quotes {
+    border-bottom: lightgray 3px solid;
+}
+h3 {
+    text-align: center;
+}
+footer {
+    margin: -12px;
+}
+button {
+    font-weight: bold;
+    background: yellowgreen;
+    color: white;
+    border:none;
+}
