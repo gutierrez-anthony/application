@@ -10,17 +10,20 @@
         <title>Tech Application</title>
     </head>
     <body>
-        <div class="container">
+        <div class="container mt-4">
             <nav>
-                <div class="position-relative">
-                    <h5>A.A. Bionics</h5>
-                    <h5>Software Development Application</h5>
-                    <button class="rounded position-absolute top-50 end-0 translate-middle" type="submit">APPLY NOW</button>
-                    <span>Seattle Washington, 12 weeks</span>
+                <div class = "container">
+                    <img id = "navImage" class="d-none" src="images/office.jpg">
+                    <div id="navContent" class = "">
+                        <button class="rounded" type="submit">APPLY NOW</button>
+                        <h5>A.A. Bionics</h5>
+                        <h5>Software Development Application</h5>
+                        <span>Seattle Washington, 12 weeks</span>
+                    </div>
                 </div>
             </nav>
             <div class="row bg-light p-3">
-                <div class="col-5">
+                <div id = "section" class="col-5">
                     <h3>About the Internship</h3>
                     <p>
                         Our internship provides base level knowledge on languages and applications, as well as standard
@@ -42,19 +45,20 @@
                     </p>
                     <h3>Meet Our Team</h3>
                     <p id="quotes">
-                        "The importance of an inclusive environment is to allow others to help you build it." - Anthony, CEO
+                        <em>"The importance of an inclusive environment is to allow others to help you build it."</em> - Anthony, CEO
                         <br>
-                        "This company provide extraordinary long-term care and prosthetics to improve quality of life,
-                        everyday functionality, and overall satisfaction." - John Doe, Senior Developer
+                        <em>"This company provide extraordinary long-term care and prosthetics to improve quality of life,
+                            everyday functionality, and overall satisfaction."</em> - John Doe, Senior Developer
                     </p>
                     <button class="rounded d-grid gap-2 col-3 mx-auto" type="submit">APPLY NOW</button>
                 </div>
-                <img class="rounded col-7 my-3" src="images/office.jpg">
+                <img id = "sectionImage" class="col-7 my-3" src="images/office.jpg">
             </div>
             <footer class="bg-dark-subtle">
                 <br>
                 <br>
             </footer>
         </div>
+        <script src="scripts/script.js"></script>
     </body>
 </html>

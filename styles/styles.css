@@ -16,3 +16,31 @@ button {
     color: white;
     border:none;
 }
+
+#sectionImage {
+    border-radius: 25px;
+}
+
+button:first-child {
+    float: right;
+}
+
+nav div.container {
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#navImage {
+    width: 100%;
+}
+
+.content {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    color: #f1f1f1;
+    background: rgba(0, 0, 0, 0.5);
+}
+/*position-relative position-absolute top-50 end-0 translate-middle*/
