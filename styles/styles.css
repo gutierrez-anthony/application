@@ -1,3 +1,10 @@
+/*
+    Web page styles for all Internship Application pages.
+    Author: Anthony Gutierrez
+    File: styles.css
+    Date: 5/5/2023
+*/
+
 p {
     border-top: lightgray 3px solid;
 }
@@ -25,7 +32,7 @@ button:first-child {
     float: right;
 }
 
-nav div.container {
+div div.container {
     position: relative;
     margin: 0 auto;
     padding: 0;
@@ -43,4 +50,3 @@ nav div.container {
     color: #f1f1f1;
     background: rgba(0, 0, 0, 0.5);
 }
-/*position-relative position-absolute top-50 end-0 translate-middle*/
