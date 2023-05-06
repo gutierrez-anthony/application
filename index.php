@@ -17,35 +17,42 @@ require_once('vendor/autoload.php');
 // Create an instance for f3 object
 $f3 = Base::instance();
 
-// Define a default route
+// Define a default route for home
 $f3->route('GET /', function() {
     // Define a view page
     $view = new Template();
     echo $view->render('views/home.html');
 });
 
-// Define a default route
+// Define an alternative default route for home
+$f3->route('GET /home', function() {
+    // Define a view page
+    $view = new Template();
+    echo $view->render('views/home.html');
+});
+
+// Define a personal-info route
 $f3->route('GET /personal-info', function() {
     // Define a view page
     $view = new Template();
     echo $view->render('views/personal_info.html');
 });
 
-// Define a default route
+// Define an experience page route
 $f3->route('GET /experience', function() {
     // Define a view page
     $view = new Template();
     echo $view->render('views/experience.html');
 });
 
-// Define a default route
+// Define the mailing list route
 $f3->route('GET /mailing-list', function() {
     // Define a view page
     $view = new Template();
     echo $view->render('views/mailingList.html');
 });
 
-// Define a default route
+// Define the summary route
 $f3->route('GET /summary', function() {
     // Define a view page
     $view = new Template();
