@@ -81,3 +81,10 @@ div p.form-control {
 div.expLabel label {
     margin: 0 5px;
 }
+
+button.ms-auto {
+    width: 33%;
+}
+label.col input {
+    margin-right: 8px;
+}

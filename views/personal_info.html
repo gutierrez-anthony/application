@@ -19,19 +19,19 @@ Date: 5/5/2023
         <div class="row gx-2 col-8 d-flex align-content-between flex-wrap">
             <div class="col-6">
                 <label for="firstName" class="form-label">First Name</label>
-                <input type="text" class="form-control" name="firstName" id="firstName">
+                <input type="text" class="form-control" name="firstName" id="firstName" value="">
             </div>
             <div class="col-6">
                 <label for="lastName" class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="lastName">
+                <input type="text" class="form-control" name="lastName" id="lastName" value="">
             </div>
             <div class="col-12">
                 <label for="email" class="form-label">Email Address</label>
-                <input type="email" class="form-control" id="email">
+                <input type="email" class="form-control" name="email" id="email" value="">
             </div>
             <div class="col-6">
                 <label for="inputState" class="form-label">State</label>
-                <select id="inputState" class="form-select">
+                <select id="inputState" class="form-select" name="inputState">
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
                     <option value="AZ">Arizona</option>
@@ -87,14 +87,14 @@ Date: 5/5/2023
             </div>
             <div class="col-6">
                 <label for="phone" class="form-label">Phone Number</label>
-                <input type="tel" class="form-control" id="phone" placeholder="123-456-7890">
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="123-456-7890" value="">
             </div>
         </div>
         <div id="right" class="col-md-4 position-relative d-flex align-content-between flex-wrap">
             <p class="form-control bg-dark-subtle"><strong>Note: </strong>All information entered is
                 protected by our <strong>privacy policy.</strong> Profile information can only be viewed
                 by others with your permission.</p>
-            <button type="submit" class="rounded w-100 form-control"><a href="experience">Next &gt;</a></button>
+            <button type="submit" class="rounded w-100 form-control">Next &gt;</button>
         </div>
     </form>
 <include href = "views/includes/footer.html"></include>

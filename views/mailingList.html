@@ -9,32 +9,30 @@
 </div>
 <form class="p-3 mb-2 bg-light row justify-content-between" action="#" method="post">
     <span>Job Openings Mailing Lists</span>
-    <div class="row gx-2 col-8 d-flex align-content-between flex-wrap">
-        <label class="form-label">Software Development Jobs</label>
-        <label><input type="checkbox"  name="sdevJobs[]" value=""> 0-2</input></label>
+    <div class="col-12">
+        <label class="form-label">Software Development Jobs</label><br>
+        <div class="sdevJobs row row-cols-4 gy-2">
+            <label class="col"><input type="checkbox"  name="sdevJobs[]" value="javascript"> JavaScript</input></label>
+            <label class="col"><input type="checkbox"  name="sdevJobs[]" value="php"> PHP</input></label>
+            <label class="col"><input type="checkbox"  name="sdevJobs[]" value="java"> Java</input></label>
+            <label class="col"><input type="checkbox"  name="sdevJobs[]" value="python"> Python</input></label>
+            <label class="col"><input type="checkbox"  name="sdevJobs[]" value="html"> HTML</input></label>
+            <label class="col"><input type="checkbox"  name="sdevJobs[]" value="css"> CSS</input></label>
+            <label class="col"><input type="checkbox"  name="sdevJobs[]" value="reactjs"> ReactJS</input></label>
+            <label class="col"><input type="checkbox"  name="sdevJobs[]" value="nodejs"> NodeJs</input></label>
+        </div>
     </div>
-    <div id="right" class="col-md-4 position-relative d-flex align-content-between flex-wrap">
-        <div class="col-12">
-            <label for="gitLink" class="form-label">Github Link</label>
-            <input type="text" class="form-control" name="gitLink" id="gitLink">
+    <div class="col-12">
+        <label class="form-label">Industry Verticals</label><br>
+        <div class="industryVert row row-cols-4 gy-2">
+            <label class="col"><input type="checkbox"  name="industryVert[]" value="saas"> SaaS</input></label>
+            <label class="col"><input type="checkbox"  name="industryVert[]" value="health tech"> Health Tech</input></label>
+            <label class="col"><input type="checkbox"  name="industryVert[]" value="ag tech"> Ag Tech</input></label>
+            <label class="col"><input type="checkbox"  name="industryVert[]" value="hr tech"> HR Tech</input></label>
+            <label class="col"><input type="checkbox"  name="industryVert[]" value="industrial tech"> Industrial Tech</input></label>
+            <label class="col"><input type="checkbox"  name="industryVert[]" value="cybersecurity"> Cybersecurity</input></label>
         </div>
-        <div class="col-12">
-            <label class="form-label">Years Experience</label><br>
-            <div class="expLabel">
-                <label><input type="radio"  name="zeroToTwo" id="zeroToTwo"> 0-2</input></label>
-                <label><input type="radio"  name="twoToFour" id="twoToFour"> 2-4</input></label>
-                <label><input type="radio"  name="fourPlus" id="fourPlus"> 4+</input></label>
-            </div>
-        </div>
-        <div class="col-12">
-            <label class="form-label">Willing to Relocate</label><br>
-            <div class="expLabel">
-                <label><input type="radio"  name="yes" id="yes"> Yes</input></label>
-                <label><input type="radio"  name="no" id="no"> No</input></label>
-                <label><input type="radio"  name="maybe" id="maybe"> Maybe</input></label>
-            </div>
-        </div>
-        <button type="submit" class="rounded w-100 form-control"><a href="summary">Next &gt;</a></button>
     </div>
+    <button type="submit" class="form-control col-4 ms-auto rounded">Next &gt;</button>
 </form>
 <include href = "views/includes/footer.html"></include>

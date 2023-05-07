@@ -11,30 +11,30 @@
     <span>Experience</span>
     <div class="row gx-2 col-8 d-flex align-content-between flex-wrap">
         <label for="bio" class="form-label">Biography</label>
-        <textarea id="bio" class="form-control" rows="7"></textarea>
+        <textarea id="bio" class="form-control" rows="7" name="bio"></textarea>
     </div>
     <div id="right" class="col-md-4 position-relative d-flex align-content-between flex-wrap">
         <div class="col-12">
             <label for="gitLink" class="form-label">Github Link</label>
-            <input type="text" class="form-control" name="gitLink" id="gitLink">
+            <input type="text" class="form-control" name="gitLink" id="gitLink" value="">
         </div>
         <div class="col-12">
             <label class="form-label">Years Experience</label><br>
             <div class="expLabel">
-                <label><input type="radio"  name="zeroToTwo" id="zeroToTwo"> 0-2</input></label>
-                <label><input type="radio"  name="twoToFour" id="twoToFour"> 2-4</input></label>
-                <label><input type="radio"  name="fourPlus" id="fourPlus"> 4+</input></label>
+                <label><input type="radio" name="yearsExp" id="zeroToTwo" value="0-2"> 0-2</input></label>
+                <label><input type="radio" name="yearsExp" id="twoToFour" value="2-4"> 2-4</input></label>
+                <label><input type="radio" name="yearsExp" id="fourPlus" value="4+"> 4+</input></label>
             </div>
         </div>
         <div class="col-12">
             <label class="form-label">Willing to Relocate</label><br>
             <div class="expLabel">
-                <label><input type="radio"  name="yes" id="yes"> Yes</input></label>
-                <label><input type="radio"  name="no" id="no"> No</input></label>
-                <label><input type="radio"  name="maybe" id="maybe"> Maybe</input></label>
+                <label><input type="radio" name="relocate" id="yes" value="yes"> Yes</input></label>
+                <label><input type="radio" name="relocate" id="no" value="no"> No</input></label>
+                <label><input type="radio" name="relocate" id="maybe" value="maybe"> Maybe</input></label>
             </div>
         </div>
-        <button type="submit" class="rounded w-100 form-control"><a href="mailing-list">Next &gt;</a></button>
+        <button type="submit" class="rounded w-100 form-control">Next &gt;</button>
     </div>
 </form>
 <include href = "views/includes/footer.html"></include>
