@@ -82,13 +82,16 @@ $f3->route('GET|POST /experience', function($f3) {
 // Define the mailing list route
 $f3->route('GET|POST /mailing-list', function($f3) {
 
-    $sdevJobs = implode(", ", $_POST['sdevJobs']);
-    $industryVert = implode(", ", $_POST['industryVert']);
+    if($_SERVER['REQUEST_METHOD'] == "POST") {
 
-    $f3->set('SESSION.sdevJobs', $sdevJobs);
-    $f3->set('SESSION.industryVert', $industryVert);
+        $sdevJobs = implode(", ", $_POST['sdevJobs']);
+        $industryVert = implode(", ", $_POST['industryVert']);
 
-    $f3->reroute('summary');
+        $f3->set('SESSION.sdevJobs', $sdevJobs);
+        $f3->set('SESSION.industryVert', $industryVert);
+
+        $f3->reroute('summary');
+    }
 
     // Define a view page
     $view = new Template();

@@ -88,3 +88,11 @@ button.ms-auto {
 label.col input {
     margin-right: 8px;
 }
+
+div#p-info {
+    width: 48%;
+}
+
+div.row p {
+    margin: 0.5rem auto;
+}
