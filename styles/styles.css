@@ -17,19 +17,29 @@ h3 {
 footer {
     margin: -12px;
 }
-button {
+button, button:last-child {
     font-weight: bold;
     background: yellowgreen;
     color: white;
     border:none;
 }
-
-#sectionImage {
-    border-radius: 25px;
+.form-label {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    font-weight: bold;
 }
 
 div#navContent button{
     float: right;
+}
+
+button a {
+    text-decoration: none;
+    color: white!important;
+}
+
+#sectionImage {
+    border-radius: 25px;
 }
 
 div div.container {
@@ -49,4 +59,25 @@ div div.container {
     padding: 20px;
     color: #f1f1f1;
     background: rgba(0, 0, 0, 0.5);
+}
+span:first-child {
+    border-bottom: lightgray 3px solid;
+    font-size: 25px;
+}
+
+textarea.form-control {
+    border-radius: 0;
+}
+
+#right {
+    padding-right: 0!important;
+    padding-left: 0!important;
+}
+
+div p.form-control {
+    margin-top: 30px!important;
+}
+
+div.expLabel label {
+    margin: 0 5px;
 }
