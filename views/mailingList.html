@@ -12,25 +12,29 @@
     <div class="col-12">
         <label class="form-label">Software Development Jobs</label><br>
         <div class="sdevJobs row row-cols-4 gy-2">
-            <label class="col"><input type="checkbox"  name="sdevJobs[]" value="JavaScript"> JavaScript</input></label>
-            <label class="col"><input type="checkbox"  name="sdevJobs[]" value="PHP"> PHP</input></label>
-            <label class="col"><input type="checkbox"  name="sdevJobs[]" value="Java"> Java</input></label>
-            <label class="col"><input type="checkbox"  name="sdevJobs[]" value="Python"> Python</input></label>
-            <label class="col"><input type="checkbox"  name="sdevJobs[]" value="HTML"> HTML</input></label>
-            <label class="col"><input type="checkbox"  name="sdevJobs[]" value="CSS"> CSS</input></label>
-            <label class="col"><input type="checkbox"  name="sdevJobs[]" value="ReactJS"> ReactJS</input></label>
-            <label class="col"><input type="checkbox"  name="sdevJobs[]" value="NodeJs"> NodeJs</input></label>
+            <repeat group="{{ @jobs }} " value="{{ @sdevJob }}">
+                <label class="col"><input type="checkbox"
+                                          name="sdevJobs[]"
+                                          value="{{ @sdevJob }}"
+                > {{ ucfirst(@sdevJob) }}</input></label>
+            </repeat>
+            <check if="{{ isset(@errors['sdevJobs']) }}">
+                <span class="invalid">{{ @errors['sdevJobs'] }}</span>
+            </check>
         </div>
     </div>
     <div class="col-12">
         <label class="form-label">Industry Verticals</label><br>
         <div class="industryVert row row-cols-4 gy-2">
-            <label class="col"><input type="checkbox"  name="industryVert[]" value="SaaS"> SaaS</input></label>
-            <label class="col"><input type="checkbox"  name="industryVert[]" value="Health Tech"> Health Tech</input></label>
-            <label class="col"><input type="checkbox"  name="industryVert[]" value="Ag Tech"> Ag Tech</input></label>
-            <label class="col"><input type="checkbox"  name="industryVert[]" value="HR Tech"> HR Tech</input></label>
-            <label class="col"><input type="checkbox"  name="industryVert[]" value="Industrial Tech"> Industrial Tech</input></label>
-            <label class="col"><input type="checkbox"  name="industryVert[]" value="Cybersecurity"> Cybersecurity</input></label>
+            <repeat group="{{ @verticals }}" value="{{ @industryVert }}">
+                <label class="col"><input type="checkbox"
+                                          name="industryVert[]"
+                                          value="{{ @industryVert }}"
+                > {{ ucfirst(@industryVert) }}</input></label>
+            </repeat>
+            <check if="{{ isset(@errors['industryVert']) }}">
+                <span class="invalid">{{ @errors['industryVert'] }}</span>
+            </check>
         </div>
     </div>
     <button type="submit" class="form-control col-4 ms-auto rounded">Next &gt;</button>

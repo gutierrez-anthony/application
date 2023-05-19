@@ -96,3 +96,19 @@ div#p-info {
 div.row p {
     margin: 0.5rem auto;
 }
+
+.required:before{
+    content: "* ";
+    color: #ff6767;
+}
+
+#required_field {
+    color: #ff6767;
+    float: right;
+    margin-right: 10%;
+    border-top: none;
+}
+
+.invalid {
+    color: darkred;
+}

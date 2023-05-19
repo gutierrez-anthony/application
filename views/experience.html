@@ -17,23 +17,44 @@
         <div class="col-12">
             <label for="gitLink" class="form-label">Github Link</label>
             <input type="text" class="form-control" name="gitLink" id="gitLink" value="">
+            <check if="{{ isset(@errors['gitLink']) }}">
+                <span class="invalid">{{ @errors['gitLink'] }}</span>
+            </check>
         </div>
         <div class="col-12">
-            <label class="form-label">Years Experience</label><br>
+            <label class="form-label required">Years Experience</label><br>
             <div class="expLabel">
-                <label><input type="radio" name="yearsExp" id="zeroToTwo" value="0-2"> 0-2</input></label>
-                <label><input type="radio" name="yearsExp" id="twoToFour" value="2-4"> 2-4</input></label>
-                <label><input type="radio" name="yearsExp" id="fourPlus" value="4+"> 4+</input></label>
+                <repeat group = "{{ @years }}" value="{{ @year }}">
+                    <label><input type="radio"
+                                  name="yearsExp"
+                                  id="{{ @year}}"
+                                  value="{{ @year}}"
+                                  <check if="{{ @year == @userYear }}">
+                                      checked = "checked"
+                                  </check>
+                    > {{ @year }}</input></label>
+                </repeat>
+                <check if="{{ isset(@errors['yearsExp']) }}">
+                    <span class="invalid">{{ @errors['yearsExp'] }}</span>
+                </check>
             </div>
         </div>
         <div class="col-12">
             <label class="form-label">Willing to Relocate</label><br>
             <div class="expLabel">
-                <label><input type="radio" name="relocate" id="yes" value="yes"> Yes</input></label>
-                <label><input type="radio" name="relocate" id="no" value="no"> No</input></label>
-                <label><input type="radio" name="relocate" id="maybe" value="maybe"> Maybe</input></label>
+                <repeat group="{{ @relocateOptions}}" value="{{ @relocateOption}}">
+                    <label><input type="radio"
+                                  name="relocate"
+                                  id="{{ @relocateOption }}"
+                                  value="{{ @relocateOption }}"
+                    > {{ ucfirst(@relocateOption) }}</input></label>
+                </repeat>
+                <check if="{{ isset(@errors['relocate']) }}">
+                    <span class="invalid">{{ @errors['relocate'] }}</span>
+                </check>
             </div>
         </div>
+        <p id="required_field">* is a required field</p>
         <button type="submit" class="rounded w-100 form-control">Next &gt;</button>
     </div>
 </form>

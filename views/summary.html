@@ -16,10 +16,20 @@
         <p>GitHub Link: {{@SESSION.gitLink}}</p>
         <p>Experience: {{@SESSION.yearsExp}} years</p>
         <p>Willing To Relocate: {{@SESSION.relocate}}</p>
-        <p>Mailing List: {{@SESSION.sdevJobs}}, {{@SESSION.industryVert}}</p>
+        <p>Mailing List:
+            <check if="{{ isset(@SESSION.jobs) && isset(@SESSION.verticals) }}">
+                {{@SESSION.jobs}}, {{@SESSION.verticals}}
+            </check>
+            <check if="{{ !isset(@SESSION.verticals) && isset(@SESSION.jobs) }}">
+                {{@SESSION.jobs}}
+            </check>
+            <check if="{{ !isset(@SESSION.jobs) && isset(@SESSION.verticals) }}">
+                {{@SESSION.verticals}}
+            </check>
+        </p>
     </div>
     <div id="right" class="col-6">
-        <img src="images/profile_picture.jpg" alt="profile picture template">
+        <img class="w-auto" src="images/profile_picture.jpg" alt="profile picture template">
         <h5>Summary</h5>
         <p class="border border-0">{{@SESSION.bio}}
         </p>

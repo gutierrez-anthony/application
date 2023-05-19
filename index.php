@@ -13,6 +13,8 @@ error_reporting(E_ALL);
 
 // Require the autoload file
 require_once('vendor/autoload.php');
+require_once('model/data-layer.php');
+require_once('model/validation.php');
 
 // Create an instance for f3 object
 $f3 = Base::instance();
@@ -33,24 +35,81 @@ $f3->route('GET /home', function() {
 
 // Define a personal-info route
 $f3->route('GET|POST /personal-info', function($f3) {
+
+    $firstName = "";
+    $lastName = "";
+    $email = "";
+    $inputState = " ";
+    $phone = "";
+
     if($_SERVER['REQUEST_METHOD'] == "POST") {
 
         //var_dump($_POST);
+        if(isset($_POST['firstName'])){
+            $firstName = $_POST['firstName'];
+        }
+        if(isset($_POST['lastName'])){
+            $lastName = $_POST['lastName'];
+        }
+        if(isset($_POST['email'])){
+            $email = $_POST['email'];
+        }
+        if(isset($_POST['inputState'])){
+            $inputState = $_POST['inputState'];
+        }
+        if(isset($_POST['phone'])){
+            $phone = $_POST['phone'];
+        }
 
-        $firstName = $_POST['firstName'];
-        $lastName = $_POST['lastName'];
-        $email = $_POST['email'];
-        $inputState = $_POST['inputState'];
-        $phone = $_POST['phone'];
+        // Validate Data and add to SESSION array
+        // Check first name
+        if (validName($firstName)) {
+            $f3->set('SESSION.firstName', $firstName);
+        } else {
+            $f3->set('errors["firstName"]', 'Invalid name entered');
+        }
 
-        $f3->set('SESSION.firstName', $firstName);
-        $f3->set('SESSION.lastName', $lastName);
-        $f3->set('SESSION.email', $email);
-        $f3->set('SESSION.inputState', $inputState);
-        $f3->set('SESSION.phone', $phone);
+        // Check last name
+        if (validName($lastName)) {
+            $f3->set('SESSION.lastName', $lastName);
+        } else {
+            $f3->set('errors["lastName"]', 'Invalid name entered');
+        }
 
-        $f3->reroute('experience');
+        // Check email
+        if (validEmail($email)) {
+            $f3->set('SESSION.email', $email);
+        } else {
+            $f3->set('errors["email"]', 'Invalid email entered');
+        }
+
+        // Check the correct state selected
+        if (validState($inputState)) {
+            $f3->set('SESSION.inputState', $inputState);
+        } else {
+            $f3->set('errors["inputState"]', 'Nice Try!!!');
+        }
+
+        // Check if phone number entered correctly
+        if(validPhone($phone)) {
+            $f3->set('SESSION.phone', $phone);
+        } else {
+            $f3->set('errors["phone"]', 'Invalid phone number entered');
+        }
+
+        if(empty($f3->get('errors'))) {
+            $f3->reroute('experience');
+        }
     }
+    // Get the data from the model and add to hive
+    $f3->set('states', getStates());
+
+    // Add user data to the hive
+    $f3->set('userFName', $firstName);
+    $f3->set('userLName', $lastName);
+    $f3->set('userEmail', $email);
+    $f3->set('userState', $inputState);
+    $f3->set('userPhone', $phone);
 
     // Define a view page
     $view = new Template();
@@ -59,20 +118,61 @@ $f3->route('GET|POST /personal-info', function($f3) {
 
 // Define an experience page route
 $f3->route('GET|POST /experience', function($f3) {
+    $bio = "";
+    $gitLink = "";
+    $yearsExp = "";
+    $relocate = "";
+
     if($_SERVER['REQUEST_METHOD'] == "POST") {
 
-        $bio = $_POST['bio'];
-        $gitLink = $_POST['gitLink'];
-        $yearsExp = $_POST['yearsExp'];
-        $relocate = $_POST['relocate'];
+        if(isset($_POST['bio'])){
+            $bio = $_POST['bio'];
+        }
+
+        if(isset($_POST['gitLink'])){
+            $gitLink = $_POST['gitLink'];
+        }
+
+        if(isset($_POST['yearsExp'])){
+            $yearsExp = $_POST['yearsExp'];
+        }
+
+        if(isset($_POST['relocate'])){
+            $relocate = $_POST['relocate'];
+        }
+
+        // Validate Data and add to SESSION array
+        if (validGithub($gitLink) || $gitLink == "") {
+            $f3->set('SESSION.gitLink', $gitLink);
+        } else {
+            $f3->set('errors["gitLink"]', 'Invalid link entered');
+        }
+
+        if (validExperience($yearsExp)) {
+            $f3->set('SESSION.yearsExp', $yearsExp);
+        } else {
+            $f3->set('errors["yearsExp"]', 'Invalid Selection');
+        }
+
+        if (in_array($relocate, getRelocate()) || $relocate == "") {
+            $f3->set('SESSION.relocate', $relocate);
+        } else {
+            $f3->set('errors["relocate"]', 'Invalid Selection');
+        }
 
         $f3->set('SESSION.bio', $bio);
-        $f3->set('SESSION.gitLink', $gitLink);
-        $f3->set('SESSION.yearsExp', $yearsExp);
-        $f3->set('SESSION.relocate', $relocate);
 
-        $f3->reroute('mailing-list');
+        if(empty($f3->get('errors'))) {
+            $f3->reroute('mailing-list');
+        }
     }
+    // Get the data from the model and add to hive
+    $f3->set('years', getYears());
+    $f3->set('relocateOptions', getRelocate());
+
+    // Add user data to the hive
+    $f3->set('userYear', $yearsExp);
+    $f3->set('userRelocate', $relocate);
 
     // Define a view page
     $view = new Template();
@@ -81,17 +181,39 @@ $f3->route('GET|POST /experience', function($f3) {
 
 // Define the mailing list route
 $f3->route('GET|POST /mailing-list', function($f3) {
+    // Initialize Arrays
+    $selectedJob = array();
+    $selectedVert = array();
 
     if($_SERVER['REQUEST_METHOD'] == "POST") {
 
-        $sdevJobs = implode(", ", $_POST['sdevJobs']);
-        $industryVert = implode(", ", $_POST['industryVert']);
+        // If a Job has been selected
+        if (!empty($_POST['sdevJobs'])) {
+            $selectedJob = $_POST['sdevJobs'];
+            // Validate the selected Jobs
+            if (validSelectionsJobs($selectedJob)) {
+                $f3->set('SESSION.jobs', implode(", ", $selectedJob));
+            } else {
+                $f3->set('errors["sdevJobs"]', 'Invalid Selection');
+            }
+        }
 
-        $f3->set('SESSION.sdevJobs', $sdevJobs);
-        $f3->set('SESSION.industryVert', $industryVert);
+        if (!empty($_POST['industryVert'])) {
+            $selectedVert = $_POST['industryVert'];
+            // Validate the selected Jobs
+            if (validSelectionsVerticals($selectedVert)) {
+                $f3->set('SESSION.verticals', implode(", ", $selectedVert));
+            } else {
+                $f3->set('errors["industryVert"]', 'Invalid Selection');
+            }
+        }
 
-        $f3->reroute('summary');
+        if(empty($f3->get('errors'))) {
+            $f3->reroute('summary');
+        }
     }
+    $f3->set('jobs', getJobs());
+    $f3->set('verticals', getVerticals());
 
     // Define a view page
     $view = new Template();
