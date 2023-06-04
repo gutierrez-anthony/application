@@ -4,34 +4,34 @@
     <div id="navContent" class = "">
         <h5>A.A. Bionics</h5>
         <h5>Software Development Application</h5>
-        <span>Seattle Washington, 12 weeks</span>
+        <span>Seattle Washington, Paid, 12 weeks</span>
     </div>
 </div>
 <form class="p-3 mb-2 bg-light row justify-content-between" action="#" method="post">
     <div id="p-info" class="h-50 my-2 px-3 row gx-2 col-5 border">
-        <p class="border border-0">Name: {{@SESSION.firstName}} {{@SESSION.lastName}}</p>
-        <p>Email: {{@SESSION.email}}</p>
-        <p>State: {{@SESSION.inputState}}</p>
-        <p>Phone: {{@SESSION.phone}}</p>
-        <p>GitHub Link: {{@SESSION.gitLink}}</p>
-        <p>Experience: {{@SESSION.yearsExp}} years</p>
-        <p>Willing To Relocate: {{@SESSION.relocate}}</p>
+        <p class="border border-0">Name: {{@SESSION.applicant->getFname()}} {{@SESSION.applicant->getLname()}}</p>
+        <p>Email: {{@SESSION.applicant->getEmail()}}</p>
+        <p>State: {{@SESSION.applicant->getState()}}</p>
+        <p>Phone: {{@SESSION.applicant->getPhone()}}</p>
+        <p>GitHub Link: {{@SESSION.applicant->getGithub()}}</p>
+        <p>Experience: {{@SESSION.applicant->getExperience()}} years</p>
+        <p>Willing To Relocate: {{@SESSION.applicant->getRelocate()}}</p>
         <p>Mailing List:
             <check if="{{ isset(@SESSION.jobs) && isset(@SESSION.verticals) }}">
-                {{@SESSION.jobs}}, {{@SESSION.verticals}}
+                {{@SESSION.applicant->getSelectionJobs()}}, {{@SESSION.applicant->getSelectionVerticals()}}
             </check>
             <check if="{{ !isset(@SESSION.verticals) && isset(@SESSION.jobs) }}">
-                {{@SESSION.jobs}}
+                {{@SESSION.applicant->getSelectionJobs()}}
             </check>
             <check if="{{ !isset(@SESSION.jobs) && isset(@SESSION.verticals) }}">
-                {{@SESSION.verticals}}
+                {{@SESSION.applicant->getSelectionVerticals()}}
             </check>
         </p>
     </div>
     <div id="right" class="col-6">
         <img class="w-auto" src="images/profile_picture.jpg" alt="profile picture template">
         <h5>Summary</h5>
-        <p class="border border-0">{{@SESSION.bio}}
+        <p class="border border-0">{{@SESSION.applicant->getBio()}}
         </p>
     </div>
     <button type="submit" class="rounded col-6 mx-auto text-center">Submit My Application!</button>

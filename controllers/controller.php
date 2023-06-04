@@ -23,6 +23,7 @@ class Controller
         $email = "";
         $inputState = " ";
         $phone = "";
+        $isSubscribed = "";
 
         if($_SERVER['REQUEST_METHOD'] == "POST") {
 
@@ -42,44 +43,55 @@ class Controller
             if(isset($_POST['phone'])){
                 $phone = $_POST['phone'];
             }
+            if(isset($_POST['isSubscribed'])){
+                $isSubscribed = $_POST['isSubscribed'];
+            }
+
+            $newApplicant = new Applicant_SubscribedToLists();
+            /*if($isSubscribed == "true"){
+                $newApplicant = new Applicant_SubscribedToLists();
+            } else {
+                $newApplicant = new Applicant();
+            }*/
 
             // Validate Data and add to SESSION array
             // Check first name
             if (Validate::validName($firstName)) {
-                $this->_f3->set('SESSION.firstName', $firstName);
+                $newApplicant->setFname($firstName);
             } else {
                 $this->_f3->set('errors["firstName"]', 'Invalid name entered');
             }
 
             // Check last name
             if (Validate::validName($lastName)) {
-                $this->_f3->set('SESSION.lastName', $lastName);
+                $newApplicant->setLname($lastName);
             } else {
                 $this->_f3->set('errors["lastName"]', 'Invalid name entered');
             }
 
             // Check email
             if (Validate::validEmail($email)) {
-                $this->_f3->set('SESSION.email', $email);
+                $newApplicant->setEmail($email);
             } else {
                 $this->_f3->set('errors["email"]', 'Invalid email entered');
             }
 
             // Check the correct state selected
             if (Validate::validState($inputState)) {
-                $this->_f3->set('SESSION.inputState', $inputState);
+                $newApplicant->setState($inputState);
             } else {
                 $this->_f3->set('errors["inputState"]', 'Nice Try!!!');
             }
 
             // Check if phone number entered correctly
             if(Validate::validPhone($phone)) {
-                $this->_f3->set('SESSION.phone', $phone);
+                $newApplicant->setPhone($phone);
             } else {
                 $this->_f3->set('errors["phone"]', 'Invalid phone number entered');
             }
 
             if(empty($this->_f3->get('errors'))) {
+                $this->_f3->set('SESSION.applicant', $newApplicant);
                 $this->_f3->reroute('experience');
             }
         }
@@ -92,6 +104,7 @@ class Controller
         $this->_f3->set('userEmail', $email);
         $this->_f3->set('userState', $inputState);
         $this->_f3->set('userPhone', $phone);
+        $this->_f3->set('isSubscribed', $isSubscribed);
 
         // Define a view page
         $view = new Template();
@@ -107,6 +120,7 @@ class Controller
 
         if($_SERVER['REQUEST_METHOD'] == "POST") {
 
+            var_dump($_POST);
             if(isset($_POST['bio'])){
                 $bio = $_POST['bio'];
             }
@@ -125,29 +139,37 @@ class Controller
 
             // Validate Data and add to SESSION array
             if (Validate::validGithub($gitLink) || $gitLink == "") {
-                $this->_f3->set('SESSION.gitLink', $gitLink);
+                $this->_f3->get('SESSION.applicant')->setGithub($gitLink);
             } else {
                 $this->_f3->set('errors["gitLink"]', 'Invalid link entered');
             }
 
             if (Validate::validExperience($yearsExp)) {
-                $this->_f3->set('SESSION.yearsExp', $yearsExp);
+                $this->_f3->get('SESSION.applicant')->setExperience($yearsExp);
             } else {
                 $this->_f3->set('errors["yearsExp"]', 'Invalid Selection');
             }
 
             if (in_array($relocate, DataLayer::getRelocate()) || $relocate == "") {
-                $this->_f3->set('SESSION.relocate', $relocate);
+                $this->_f3->get('SESSION.applicant')->setRelocate($relocate);
             } else {
                 $this->_f3->set('errors["relocate"]', 'Invalid Selection');
             }
 
-            $this->_f3->set('SESSION.bio', $bio);
+            $this->_f3->get('SESSION.applicant')->setBio($bio);
 
             if(empty($this->_f3->get('errors'))) {
-                $this->_f3->reroute('mailing-list');
+                if(
+                    $_SESSION.applicant instanceof ($GLOBALS['Applicant_SubscribedToLists'])){
+                    $this->_f3->reroute('mailing-list');
+                }
+                else {
+                    $this->_f3->reroute('summary');
+                }
+
             }
         }
+
         // Get the data from the model and add to hive
         $this->_f3->set('years', DataLayer::getYears());
         $this->_f3->set('relocateOptions', DataLayer::getRelocate());
@@ -156,6 +178,8 @@ class Controller
         $this->_f3->set('userYear', $yearsExp);
         $this->_f3->set('userRelocate', $relocate);
 
+        $this->_f3->get('POST.isSubscribed');
+        var_dump($_POST);
         // Define a view page
         $view = new Template();
         echo $view->render('views/experience.html');
@@ -173,7 +197,9 @@ class Controller
                 $selectedJob = $_POST['sdevJobs'];
                 // Validate the selected Jobs
                 if (Validate::validSelectionsJobs($selectedJob)) {
-                    $this->_f3->set('SESSION.jobs', implode(", ", $selectedJob));
+                    $jobs = implode(", ", $selectedJob);
+
+                    $this->_f3->get('SESSION.applicant')->setSelectionJobs($jobs);
                 } else {
                     $this->_f3->set('errors["sdevJobs"]', 'Invalid Selection');
                 }
@@ -183,7 +209,9 @@ class Controller
                 $selectedVert = $_POST['industryVert'];
                 // Validate the selected Jobs
                 if (Validate::validSelectionsVerticals($selectedVert)) {
-                    $this->_f3->set('SESSION.verticals', implode(", ", $selectedVert));
+                    $verticals = implode(", ", $selectedVert);
+
+                    $this->_f3->get('SESSION.applicant')->setSelectionVerticals($verticals);
                 } else {
                     $this->_f3->set('errors["industryVert"]', 'Invalid Selection');
                 }
@@ -203,6 +231,8 @@ class Controller
 
     function summary()
     {
+        var_dump($_SESSION);
+        var_dump($_POST);
         // Define a view page
         $view = new Template();
         echo $view->render('views/summary.html');

@@ -5,13 +5,13 @@ File: personal_info.html
 Date: 5/5/2023
 -->
 
-<include href = "views/includes/header.html"></include>
+<include href="views/includes/header.html" xmlns="http://www.w3.org/1999/html"></include>
     <div class="container">
         <img id="navImage" class="d-none" src="images/office.jpg" alt="picture of office">
         <div id="navContent" class="">
             <h5>A.A. Bionics</h5>
             <h5>Software Development Application</h5>
-            <span>Seattle Washington, 12 weeks</span>
+            <span>Seattle Washington, Paid, 12 weeks</span>
         </div>
     </div>
     <form class="p-3 mb-2 bg-light row justify-content-between" action="#" method="post">
@@ -19,21 +19,21 @@ Date: 5/5/2023
         <div class="row gx-2 col-8 d-flex align-content-between flex-wrap">
             <div class="col-6">
                 <label for="firstName" class="form-label required">First Name</label>
-                <input type="text" class="form-control" name="firstName" id="firstName" value="">
+                <input type="text" class="form-control" name="firstName" id="firstName" value="{{ @userFName}}">
                 <check if="{{ isset(@errors['firstName']) }}">
                     <span class="invalid">{{ @errors['firstName'] }}</span>
                 </check>
             </div>
             <div class="col-6">
                 <label for="lastName" class="form-label required">Last Name</label>
-                <input type="text" class="form-control" name="lastName" id="lastName" value="">
+                <input type="text" class="form-control" name="lastName" id="lastName" value="{{ @userLName}}">
                 <check if="{{ isset(@errors['lastName']) }}">
                     <span class="invalid">{{ @errors['lastName'] }}</span>
                 </check>
             </div>
             <div class="col-12">
                 <label for="email" class="form-label required">Email Address</label>
-                <input type="email" class="form-control" name="email" id="email" value="">
+                <input type="email" class="form-control" name="email" id="email" value="{{ @userEmail}}">
                 <check if="{{ isset(@errors['email']) }}">
                     <span class="invalid">{{ @errors['email'] }}</span>
                 </check>
@@ -65,8 +65,7 @@ Date: 5/5/2023
                            role="switch"
                            id="isSubscribed"
                            name="isSubscribed"
-                           value="">
-                    <label for="isSubscribed">Sign me up for job openings mailing lists!</label>
+                           value="true"> Sign me up for job openings mailing lists!
                 </div>
             </div>
         </div>

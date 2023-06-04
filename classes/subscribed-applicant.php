@@ -2,12 +2,14 @@
 
 class Applicant_SubscribedToLists extends Applicant
 {
-    private $_selectionJobs = array();
-    private $_selectionVerticals = array();
+    private $_selectionJobs;
+    private $_selectionVerticals;
 
     function __construct()
     {
         parent::__construct();
+        $this->_selectionJobs = array();
+        $this->_selectionVerticals = array();
     }
 
     /**
@@ -19,9 +21,9 @@ class Applicant_SubscribedToLists extends Applicant
     }
 
     /**
-     * @param array $selectionJobs
+     * @param string $selectionJobs
      */
-    public function setSelectionJobs(array $selectionJobs)
+    public function setSelectionJobs($selectionJobs)
     {
         $this->_selectionJobs = $selectionJobs;
     }
@@ -35,9 +37,9 @@ class Applicant_SubscribedToLists extends Applicant
     }
 
     /**
-     * @param array $selectionVerticals
+     * @param string $selectionVerticals
      */
-    public function setSelectionVerticals(array $selectionVerticals)
+    public function setSelectionVerticals($selectionVerticals)
     {
         $this->_selectionVerticals = $selectionVerticals;
     }

@@ -14,11 +14,7 @@ class Applicant
 
     /**
      * Default constructor for Applicant object
-     * @param string $fname
-     * @param string $lname
-     * @param string $email
-     * @param string $state
-     * @param string $phone
+     *
      */
     function __construct()
     {
